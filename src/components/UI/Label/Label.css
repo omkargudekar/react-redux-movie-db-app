@@ -1,0 +1,6 @@
+.label {
+    display: block;
+    width: 100%;
+    min-height: 17px;
+    font-weight: bold;
+}
