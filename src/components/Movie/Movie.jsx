@@ -2,20 +2,33 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 
-var keyToTextMap = new Map({
-  Title: "Title",
-  Rated: "Viewers Rating",
-  Released: "Release Date"
-});
-
-var keyToValueRenderFnMap = new Map({
-    Title: (value)=>{
-        return value;
+const dataConfig={
+    Title:{
+        keyToText:'Title',
+        renderFn:(value)=>{
+            return value;
+        }
     },
-    Poster: (value)=>{
-        return <img src={value} alt="Movie Poster" />;
+    Rated:{
+        keyToText: 'Viewers Rating',
+    },
+    Poster:{
+        renderFn: (value) => {
+            return <img src={value} alt="Movie Poster" />;
+        }
+    },
+    Released:{
+        keyToText: 'Release Date',
     }
-});
+}
+
+const getDataConfigProperty=(key,config)=>{
+    if (dataConfig[key] && dataConfig[key][config]){
+        return dataConfig[key][config];
+    }
+    return null;
+}
+
 
 class Movie extends Component {
 
@@ -29,8 +42,9 @@ class Movie extends Component {
         let tableBody=[];
         _.forEach(data,(key,value)=>{
             let rowItems=[];
-            rowItems.push(keyToTextMap(key)||key);
-            rowItems.push(keyToValueRenderFnMap(value) || value);
+            rowItems.push(getDataConfigProperty(key,'keyToText') || key);
+            let renderFn = getDataConfigProperty(key, 'renderFn') || null;
+            rowItems.push((renderFn) ? renderFn(value) : value);
             tableBody.push(this.getTableRow(rowItems));
         });
     }

@@ -2,15 +2,18 @@ import React from 'react';
 import MovieCard from '../MovieCard/MovieCard'
 const SearchResult = (props) => {
 
-    const searchResult=()=>{
-        return props.searchResult.map((el)=>{
-            return <MovieCard data={el.data}/>
-        })();
+    const renderSearchResult=()=>{
+        if (props.searchResult && props.searchResult.length>0){
+            return props.searchResult.map((el, index) => {
+                return <MovieCard data={el.data} key={index}></MovieCard>
+            });
+        }
+        return <span>No result to display.</span>
     }
     
     return (
         <React.Fragment>
-            {searchResult}
+            {renderSearchResult()}
         </React.Fragment>
     );
 };

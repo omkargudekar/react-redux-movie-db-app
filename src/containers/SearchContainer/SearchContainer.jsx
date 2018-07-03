@@ -1,8 +1,12 @@
 import React from 'react';
 import SearchBox from '../../components/SearchBox/SearchBox'
+import SearchResult from '../../components/SearchResult/SearchResult'
 const SearchContainer = props => {
     return (
-        <SearchBox> </SearchBox>
+        <React.Fragment>
+            <SearchBox> </SearchBox>
+            <SearchResult></SearchResult>    
+        </React.Fragment>
     );
 };
 
