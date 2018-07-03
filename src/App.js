@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import LoginFormContainer from './containers/LoginFormContainer/LoginFormContainer'
+import SearchContainer from './containers/SearchContainer/SearchContainer'
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <React.Fragment>
         <LoginFormContainer></LoginFormContainer>
-      </div>
+        <SearchContainer > </SearchContainer>
+      </React.Fragment>
     );
   }
 }
