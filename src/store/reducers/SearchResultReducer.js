@@ -8,7 +8,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.SEARCH_MOVIE:
-            return StateUtil.getUpdatedState(state, { searchResult: action.value })
+            return StateUtil.getUpdatedState(state, { searchResult: action.payload.searchResult })
         default:
             return state;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ParentHOC = props => {
+const WrapperHOC = props => {
     return (
         <div {...props}>
                 {props.children}
@@ -10,4 +10,4 @@ const ParentHOC = props => {
 
 
 
-export default ParentHOC;
+export default WrapperHOC;

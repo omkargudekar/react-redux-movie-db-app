@@ -7,20 +7,22 @@ import InputText from '../UI/InputText/InputText'
 import InputPassword from '../UI/InputPassword/InputPassword'
 import Button from '../UI/Button/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faUser, faKey } from '@fortawesome/free-solid-svg-icons'
+import { faSignInAlt, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons'
 import StateUtil from '../../util/StateUtil'
+import LoginAction from '../../store/actions/LoginAction'
+import {connect} from 'react-redux';
 
 class LoginForm extends Component {
     
     
     state = {
-        username: '',
+        email: '',
         password: ''
     }
 
     getLoginFormPayload=()=>{
         return {
-            username:this.state.username,
+            email:this.state.email,
             password:this.state.password
         }
     }
@@ -28,7 +30,7 @@ class LoginForm extends Component {
     resetButtonHandler=(e)=>{
         e.preventDefault();
         let resetState={
-            username: '',
+            email: '',
             password: ''
         }
 
@@ -37,7 +39,7 @@ class LoginForm extends Component {
 
     loginButtonHandler=(e)=>{
         e.preventDefault();
-        this.props.onLoginButtonHandler(this.getLoginFormPayload());
+        this.props.loginAction(this.getLoginFormPayload());
     }
 
 
@@ -46,14 +48,20 @@ class LoginForm extends Component {
 
     render() {
         return (
+
             <Form>
                 <FormControlsGroup>
                     <FormControl>
-                        <Label><FontAwesomeIcon icon={faUser} /> Username</Label>
+                        <Label> Login Status : {''+this.props.loggedIn}</Label>
+                    </FormControl>
+                </FormControlsGroup>
+                <FormControlsGroup>
+                    <FormControl>
+                        <Label><FontAwesomeIcon icon={faEnvelope} /> Email</Label>
                     </FormControl>
                     <FormControl>
-                        <InputText value={this.state.username} onChange={(e) => {
-                            this.setState(StateUtil.getUpdatedKeyValueState(this.state, "username", e.target.value))
+                        <InputText value={this.state.email} onChange={(e) => {
+                            this.setState(StateUtil.getUpdatedKeyValueState(this.state, "email", e.target.value))
                         }} />
                     </FormControl>
                 </FormControlsGroup>
@@ -80,4 +88,17 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+const mapStateToProps = (state)=>{
+    return{
+        loggedIn: state.loginReducerSlice.loggedIn
+    }
+}
+
+
+const mapDispatchToProps  = (dispatch)=>{
+    return {
+        loginAction:(params)=>dispatch(LoginAction(params))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps )(LoginForm);
