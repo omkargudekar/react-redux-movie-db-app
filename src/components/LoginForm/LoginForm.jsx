@@ -74,11 +74,11 @@ class LoginForm extends Component {
                 <FormControlsGroup>
                     <FormControl>
                         <div style={{ width: "48%", display: "inline-block" }}>
-                            <Button onClick={(e) => { this.resetButtonHandler(e) }} style={{ backgroundColor: "#3498DB", border: "#000 1px solid", color: "white", textDecoration: "none" }}>Reset</Button>
+                            <Button onClick={(e) => { this.resetButtonHandler(e) }} style={{ backgroundColor: "#37457E", border: "#000 1px solid", color: "white", textDecoration: "none" }}>Reset</Button>
                         </div>
                         <div style={{ width: "4%", display: "inline-block" }}></div>
                         <div style={{ width: "48%", display: "inline-block" }}>
-                            <Button onClick={(e) => { this.loginButtonHandler(e) }} style={{ backgroundColor: "#4CAF50", border: "#000 1px solid", color: "white", textDecoration: "none" }}><FontAwesomeIcon icon={faSignInAlt} /> Login</Button>
+                            <Button onClick={(e) => { this.loginButtonHandler(e) }} style={{ backgroundColor: "#5B6C00", border: "#000 1px solid", color: "white", textDecoration: "none" }}><FontAwesomeIcon icon={faSignInAlt} /> Login</Button>
                         </div>
                     </FormControl>
                 </FormControlsGroup>

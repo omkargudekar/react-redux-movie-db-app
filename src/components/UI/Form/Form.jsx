@@ -4,7 +4,7 @@ import Classes from './Form.css'
 const Form = props => {
     return (
         <div>
-            <div className={Classes['form-title']}>{props.title}</div>
+            {(props.title) ? <div className={Classes['form-title']}>{props.title}</div>:null}
             <form {...props} className={Classes['form']}>
                 {props.children}
             </form>
