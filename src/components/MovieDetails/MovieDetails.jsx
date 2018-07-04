@@ -30,7 +30,7 @@ const getDataConfigProperty=(key,config)=>{
 }
 
 
-class Movie extends Component {
+class MovieDetails extends Component {
 
     getTableRow = (rowItems) => {
         let renderedColumns = _.forEach(rowItems,(el)=>{
@@ -64,4 +64,4 @@ class Movie extends Component {
 
 
 
-export default Movie;
+export default MovieDetails;

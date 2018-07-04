@@ -1,7 +1,7 @@
 .button{
-    display: block;
+    display: inline-block;
     width:100%;
     min-height: 25px;
     font-weight: bold;
-
 }
+

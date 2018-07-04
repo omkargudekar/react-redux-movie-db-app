@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import LoginFormContainer from './containers/LoginFormContainer/LoginFormContainer'
-import SearchContainer from './containers/SearchContainer/SearchContainer'
+import LoginForm from './components/LoginForm/LoginForm'
+import MovieSearchContainer from './components/MovieSearchContainer/MovieSearchContainer'
 import NavigationBar from './components/NavigationBar/NavigationBar'
-import Movie from './components/Movie/Movie'
-import {Route, BrowserRouter,Switch} from 'react-router-dom'
+import MovieDetails from './components/MovieDetails/MovieDetails'
+import {Route, BrowserRouter,Switch,Redirect} from 'react-router-dom'
 import WrapperHOC from './hoc/WrapperHOC/WrapperHOC'
 import LoginReducer from './store/reducers/LoginReducer';
 import MovieDetailsReducer from './store/reducers/MovieDetailsReducer';
@@ -34,10 +34,11 @@ class App extends Component {
           <WrapperHOC>  
             <NavigationBar></NavigationBar>
             <Switch>
-              <Route path="/login" component={LoginFormContainer}></Route>
-              <Route path="/search" component={SearchContainer}></Route>
-              <Route path="/movie/:id" component={Movie}></Route>
+              <Route path="/login" component={LoginForm}></Route>
+              <Route path="/search" component={MovieSearchContainer}></Route>
+              <Route path="/movie/:id" component={MovieDetails}></Route>
               <Route path="/logout" component={Logout}></Route>
+              <Route path="/" component={LoginForm}></Route>
             </Switch>
           </WrapperHOC>
         </BrowserRouter>

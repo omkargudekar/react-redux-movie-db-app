@@ -1,6 +1,6 @@
 import React from 'react';
 import MovieCard from '../MovieCard/MovieCard'
-const SearchResult = (props) => {
+const MovieSearchResult = (props) => {
 
     const renderSearchResult=()=>{
         if (props.searchResult && props.searchResult.length>0){
@@ -18,4 +18,4 @@ const SearchResult = (props) => {
     );
 };
 
-export default SearchResult;
+export default MovieSearchResult;

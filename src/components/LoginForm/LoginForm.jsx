@@ -11,7 +11,8 @@ import { faSignInAlt, faEnvelope, faKey } from '@fortawesome/free-solid-svg-icon
 import StateUtil from '../../util/StateUtil'
 import LoginAction from '../../store/actions/LoginAction'
 import {connect} from 'react-redux';
-
+import Classes from './LoginForm.css'
+import {Redirect} from 'react-router-dom'
 class LoginForm extends Component {
     
     
@@ -47,14 +48,9 @@ class LoginForm extends Component {
     }
 
     render() {
-        return (
 
-            <Form>
-                <FormControlsGroup>
-                    <FormControl>
-                        <Label> Login Status : {''+this.props.loggedIn}</Label>
-                    </FormControl>
-                </FormControlsGroup>
+        let loginForm=(
+            <Form title="Login Form">
                 <FormControlsGroup>
                     <FormControl>
                         <Label><FontAwesomeIcon icon={faEnvelope} /> Email</Label>
@@ -77,13 +73,24 @@ class LoginForm extends Component {
                 </FormControlsGroup>
                 <FormControlsGroup>
                     <FormControl>
-                        <Button onClick={(e)=>{this.resetButtonHandler(e)}}>Reset</Button>
-                    </FormControl>
-                    <FormControl>
-                        <Button onClick={(e) => { this.loginButtonHandler(e) }}><FontAwesomeIcon icon={faSignInAlt} /> Login</Button>
+                        <div style={{ width: "48%", display: "inline-block" }}>
+                            <Button onClick={(e) => { this.resetButtonHandler(e) }} style={{ backgroundColor: "#3498DB", border: "#000 1px solid", color: "white", textDecoration: "none" }}>Reset</Button>
+                        </div>
+                        <div style={{ width: "4%", display: "inline-block" }}></div>
+                        <div style={{ width: "48%", display: "inline-block" }}>
+                            <Button onClick={(e) => { this.loginButtonHandler(e) }} style={{ backgroundColor: "#4CAF50", border: "#000 1px solid", color: "white", textDecoration: "none" }}><FontAwesomeIcon icon={faSignInAlt} /> Login</Button>
+                        </div>
                     </FormControl>
                 </FormControlsGroup>
             </Form>
+        );
+        if (this.props.loggedIn){
+            loginForm = (<Redirect to="/search"></Redirect>)
+        }
+        return (
+            <div className={Classes['loginForm']}>
+                {loginForm}
+            </div>
         );
     }
 }

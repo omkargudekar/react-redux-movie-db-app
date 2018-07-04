@@ -6,7 +6,7 @@ import InputText from '../UI/InputText/InputText'
 import Button from '../UI/Button/Button'
 
 
-class SearchBox extends Component {
+class MovieSearchBox extends Component {
     render() {
         return (
             <Form>
@@ -23,4 +23,4 @@ class SearchBox extends Component {
     }
 }
 
-export default SearchBox;
+export default MovieSearchBox;
