@@ -3,7 +3,7 @@ import LoginForm from './components/LoginForm/LoginForm'
 import MovieSearchContainer from './components/MovieSearchContainer/MovieSearchContainer'
 import NavigationBar from './components/NavigationBar/NavigationBar'
 import MovieDetails from './components/MovieDetails/MovieDetails'
-import {Route, BrowserRouter,Switch,Redirect} from 'react-router-dom'
+import {Route, BrowserRouter,Switch} from 'react-router-dom'
 import WrapperHOC from './hoc/WrapperHOC/WrapperHOC'
 import LoginReducer from './store/reducers/LoginReducer';
 import MovieDetailsReducer from './store/reducers/MovieDetailsReducer';

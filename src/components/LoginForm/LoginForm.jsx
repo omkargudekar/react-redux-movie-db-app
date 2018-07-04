@@ -50,7 +50,7 @@ class LoginForm extends Component {
     render() {
 
         let loginForm=(
-            <Form title="Login Form">
+            <Form title="MovieDB Login">
                 <FormControlsGroup>
                     <FormControl>
                         <Label><FontAwesomeIcon icon={faEnvelope} /> Email</Label>

@@ -1,12 +1,11 @@
 .form{
     padding:20px;
-    border:1px solid #000;
-    background-color:#dfe0dc;
+    border:1px solid #272D2D;
 }
 
 .form-title{
     padding:10px;
-    background-color:#333;
+    background-color:#272D2D;
     color:#dfe0dc;
     padding:-20px;
 
