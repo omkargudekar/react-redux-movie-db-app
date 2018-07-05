@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-
+import MovieDetailsAction from '../../store/actions/MovieDetailsAction'
+import {connect} from 'react-redux';
 
 const dataConfig={
     Title:{
@@ -32,36 +33,54 @@ const getDataConfigProperty=(key,config)=>{
 
 class MovieDetails extends Component {
 
-    getTableRow = (rowItems) => {
-        let renderedColumns = _.forEach(rowItems,(el)=>{
-            return <td>el</td>
-        });
-        return <tr>{renderedColumns}</tr>
+    loadMovie=()=>{
+        if (this.props.match.params.id != this.state.id) {
+            this.setState({
+                id: this.props.match.params.id
+            });
+            this.props.getMovieDetails(this.props.match.params.id)
+        }
+
     }
-    getTableBody = (data)=>{
-        let tableBody=[];
-        _.forEach(data,(key,value)=>{
-            let rowItems=[];
-            rowItems.push(getDataConfigProperty(key,'keyToText') || key);
-            let renderFn = getDataConfigProperty(key, 'renderFn') || null;
-            rowItems.push((renderFn) ? renderFn(value) : value);
-            tableBody.push(this.getTableRow(rowItems));
-        });
+    state={
+        id:null
+    }
+    componentDidMount(){
+        this.loadMovie();
+    }
+    componentDidUpdate() {
+        this.loadMovie();
     }
 
-    renderTable = ()=>{
+
+    renderMovieDetails = (data)=>{
+        console.log(data)
         return (
-            <table>
-                <tbody>{this.getTableBody(this.props.data)}</tbody>
-            </table>
-        );
+                <table>
+                    <tbody>
+                    </tbody>
+                </table>
+            );
     }
-
     render() {
-        return <React.Fragment>{this.renderTable()}</React.Fragment>;
+        return (
+                <React.Fragment>
+                {(this.props.movieDetails) ? this.renderMovieDetails(this.props.movieDetails):<span>No movie with that title</span>}
+                </React.Fragment>
+        );
     }
 }
 
+const mapStateToProps=(state)=>{
+    return{
+        movieDetails: state.movieDetailsReducerSlice.selectedMovieDetails
+    }
+}
 
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        getMovieDetails: (titleId) => dispatch(MovieDetailsAction(titleId))
+    }
+}
 
-export default MovieDetails;
+export default connect(mapStateToProps,mapDispatchToProps)(MovieDetails);

@@ -10,9 +10,7 @@ import {connect} from 'react-redux';
 import SearchMovieAction from '../../store/actions/SearchMovieAction'
 import MovieSearchResult from '../MovieSearchResult/MovieSearchResult'
 
-
 class MovieSearchBox extends Component {
-    
     state={
         currentSearchQuery:null
     }
@@ -60,7 +58,6 @@ class MovieSearchBox extends Component {
         );
     }
 }
-
 
 const mapStateToProps=(state)=>{
     return {
