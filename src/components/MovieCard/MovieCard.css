@@ -9,13 +9,21 @@
 }
 
 .movieCardTitle{
-    width: 200px;
-    display: inline-block;
-    background-color: #CCC;
+    font-weight: bold
 }
 
+.movieCardField{
+    width: 200px;
+    white-space:nowrap;
+    background-color: #CCC;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
 .movieCardPoster{
     width:200px;
+    height:300px;
+
     margin-bottom:-5px;
 
 }

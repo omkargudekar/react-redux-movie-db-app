@@ -6,8 +6,8 @@ const MovieCard = (props) => {
             <div >
                 <img src={props.data.Poster} className={Classes["movieCardPoster"]} alt={props.data.Title}/>
             </div>
-            <div className={Classes["movieCardTitle"]}>{props.data.Title}</div>
-            <div className={Classes["movieCardTitle"]}>({props.data.Year})</div>
+            <div className={Classes["movieCardField"]}><span className={Classes["movieCardTitle"]}>{props.data.Title}</span></div>
+            <div className={Classes["movieCardField"]}>({props.data.Year})</div>
         </div>
     );
 };

@@ -13,7 +13,9 @@ const MovieSearchResult = (props) => {
     
     return (
         <React.Fragment>
-            {renderSearchResult()}
+            <div style={{textAlign:"center"}}>
+                {renderSearchResult()}
+            </div>
         </React.Fragment>
     );
 };
