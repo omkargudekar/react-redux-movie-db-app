@@ -13,13 +13,15 @@ import LoginAction from '../../store/actions/LoginAction'
 import {connect} from 'react-redux';
 import Classes from './LoginForm.css'
 import {Redirect} from 'react-router-dom'
-class LoginForm extends Component {
-    
-    
+
+
+class LoginForm extends Component {    
     state = {
         email: '',
         password: ''
     }
+    
+
 
     getLoginFormPayload=()=>{
         return {

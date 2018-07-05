@@ -5,17 +5,18 @@ import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import Classes from './NavigationBar.css';
 
 class NavigationBar extends Component {
+
     render() {
-        return (
+        let userMenu = (
             <ul className={Classes['ul']}>
                 <li className={Classes['li']}><NavLink to="/logout"><FontAwesomeIcon icon={faSignOutAlt} /> Logout</NavLink></li>
             </ul>
-        );
+         )
+        return (<React.Fragment>{userMenu}</React.Fragment>)
     }
 }
 
-NavigationBar.propTypes = {
 
-};
+
 
 export default NavigationBar;

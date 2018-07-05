@@ -1,13 +1,22 @@
 import React from 'react';
+import {Redirect} from 'react-router-dom'
+import { connect } from 'react-redux';
 
 const Logout = props => {
-    return (
-        <div>
-            You are logged out.
-        </div>
-    );
+    return (<Redirect to={"/"}></Redirect>);
 };
 
+const mapStateToProps = (state) => {
+    return {
+        loggedIn: state.loginReducerSlice.loggedIn
+    }
+}
 
 
-export default Logout;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginAction: (params) => dispatch((params))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);
