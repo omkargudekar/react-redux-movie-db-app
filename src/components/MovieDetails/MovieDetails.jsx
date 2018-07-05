@@ -1,35 +1,6 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import MovieDetailsAction from '../../store/actions/MovieDetailsAction'
 import {connect} from 'react-redux';
-
-const dataConfig={
-    Title:{
-        keyToText:'Title',
-        renderFn:(value)=>{
-            return value;
-        }
-    },
-    Rated:{
-        keyToText: 'Viewers Rating',
-    },
-    Poster:{
-        renderFn: (value) => {
-            return <img src={value} alt="Movie Poster" />;
-        }
-    },
-    Released:{
-        keyToText: 'Release Date',
-    }
-}
-
-const getDataConfigProperty=(key,config)=>{
-    if (dataConfig[key] && dataConfig[key][config]){
-        return dataConfig[key][config];
-    }
-    return null;
-}
-
 
 class MovieDetails extends Component {
 
@@ -54,12 +25,26 @@ class MovieDetails extends Component {
 
 
     renderMovieDetails = (data)=>{
-        console.log(data)
         return (
-                <table>
-                    <tbody>
-                    </tbody>
-                </table>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div>{data.Title} ({data.Year})</div>
+                            <div><img src={data.Poster} alt="" style={{ height: "200px" }} /></div>
+                            <div>Writer: {data.Writer}</div>
+                            <div>Director: {data.Director}</div>
+                            <div>Actors: {data.Actors}</div>
+                            <div>Runtime: {data.Runtime}</div>
+                            <div>Genre: {data.Genre}</div>
+                            <div>Plot: {data.Plot}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
             );
     }
     render() {
