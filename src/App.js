@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LoginForm from './components/LoginForm/LoginForm'
-import MovieSearchContainer from './components/MovieSearchContainer/MovieSearchContainer'
+import MovieSearchBox from './components/MovieSearchBox/MovieSearchBox'
 import NavigationBar from './components/NavigationBar/NavigationBar'
 import MovieDetails from './components/MovieDetails/MovieDetails'
 import {Route, BrowserRouter,Switch} from 'react-router-dom'
@@ -35,7 +35,7 @@ class App extends Component {
             <NavigationBar></NavigationBar>
             <Switch>
               <Route path="/login" component={LoginForm}></Route>
-              <Route path="/search" component={MovieSearchContainer}></Route>
+              <Route path="/search" component={MovieSearchBox}></Route>
               <Route path="/movie/:id" component={MovieDetails}></Route>
               <Route path="/logout" component={Logout}></Route>
               <Route path="/" component={LoginForm}></Route>

@@ -1,26 +1,13 @@
 import React from 'react';
-
+import Classes from './MovieCard.css'
 const MovieCard = (props) => {
     return (
-        <div>
-            <div>{props.data.Title}</div>
-            <div>
-                <img src={props.data.Poster} alt={props.data.Title}/>
+        <div className={Classes["movieCard"]}>
+            <div >
+                <img src={props.data.Poster} className={Classes["movieCardPoster"]} alt={props.data.Title}/>
             </div>
-            <div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>Year</td>
-                            <td>{props.data.Year}</td>
-                        </tr>
-                        <tr>
-                            <td>Rated</td>
-                            <td>{props.data.Rated}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div className={Classes["movieCardTitle"]}>{props.data.Title}</div>
+            <div className={Classes["movieCardTitle"]}>({props.data.Year})</div>
         </div>
     );
 };
