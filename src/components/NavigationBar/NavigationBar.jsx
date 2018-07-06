@@ -6,8 +6,6 @@ import Classes from './NavigationBar.css';
 import {connect} from 'react-redux';
 
 class NavigationBar extends Component {
-
-
     routeSpecificItemsList = {
         search: [
             <li key="movieDetailsMenuKey" className={Classes['li']}><NavLink to="/movie/tt0468569" >Movie Details</NavLink></li>
@@ -21,7 +19,6 @@ class NavigationBar extends Component {
         ]
     }
 
-
     render() {
         let authenticatedItems = [
             <li className={Classes['li']} key="logutMenuKey"><NavLink to="/logout"><FontAwesomeIcon icon={faSignOutAlt} /> Logout</NavLink></li>
@@ -29,7 +26,7 @@ class NavigationBar extends Component {
         
         let unauthenticatedItems = [
         ];
-
+        
         return (
                 <ul className={Classes['ul']}>
                     {(this.props.isLoggedIn) ? authenticatedItems : unauthenticatedItems}
