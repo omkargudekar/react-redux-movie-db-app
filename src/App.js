@@ -5,46 +5,45 @@ import NavigationBar from './components/NavigationBar/NavigationBar'
 import MovieDetails from './components/MovieDetails/MovieDetails'
 import {Route, BrowserRouter,Switch,Redirect} from 'react-router-dom'
 import WrapperHOC from './hoc/WrapperHOC/WrapperHOC'
-import LoginReducer from './store/reducers/LoginReducer';
-import MovieDetailsReducer from './store/reducers/MovieDetailsReducer';
-import SearchResultReducer from './store/reducers/SearchResultReducer';
 import Logout from './components/Logout/Logout'
-import ReduxThunkMiddleware from 'redux-thunk'
-import LoggerMiddleware from './store/middlewares/LoggerMiddleware'
-import {createStore,combineReducers,applyMiddleware, compose} from 'redux';
-import {Provider} from 'react-redux';
+import {connect} from 'react-redux'
 import './App.css';
 
-const RootReducer = combineReducers(
-  { 
-    loginReducerSlice: LoginReducer, 
-    movieDetailsReducerSlice: MovieDetailsReducer, 
-    searchResultReducerSlice:SearchResultReducer
-  }
-);
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(RootReducer, composeEnhancers(applyMiddleware(ReduxThunkMiddleware, LoggerMiddleware)));
 
 class App extends Component {
   render() {
+    let authenticatedRoutes = (
+      <Switch>
+        <Route path="/search" component={MovieSearchBox}></Route>
+        <Route path="/movie/:id" component={MovieDetails}></Route>
+        <Route path="/logout" component={Logout}></Route>
+        <Redirect to="/search" />
+      </Switch>
+    );
+
+    let unauthenticatedRoutes=(
+      <Switch>
+        <Route path="/login" component={LoginForm}></Route>
+        <Redirect to="/login" />
+      </Switch>   
+    );
+
     return (
-      <Provider store={store}>
         <BrowserRouter>
-          <WrapperHOC>  
-            <NavigationBar></NavigationBar>
-            <Switch>
-              <Route path="/login" component={LoginForm}></Route>
-              <Route path="/search" component={MovieSearchBox}></Route>
-              <Route path="/movie/:id" component={MovieDetails}></Route>
-              <Route path="/logout" component={Logout}></Route>
-              <Redirect to="/"/>
-            </Switch>
+          <WrapperHOC>
+           <NavigationBar></NavigationBar>
+            {(this.props.isLoggedIn) ? authenticatedRoutes : unauthenticatedRoutes}
           </WrapperHOC>
         </BrowserRouter>
-      </Provider>
     );
   }
 }
 
-export default App;
+
+const mapStateToProps=(state)=>{
+  return{
+    isLoggedIn: state.loginReducerSlice.loggedIn
+  }
+}
+
+export default connect(mapStateToProps)(App);

@@ -19,14 +19,14 @@ const MovieDetailsAction = (title) => {
     return async (dispatch) => {
         try {
             let searchResultResponse = await getMovie(title);
-            if (searchResultResponse.data.Response == "True") {
+            if (searchResultResponse.data.Response === "True") {
                 dispatch({
                     type: ActionTypes.GET_MOVIE_DETAILS,
                     payload: {
                         selectedMovieDetails: searchResultResponse.data,
                     }
                 });
-            } else if (searchResultResponse.data.Response == "False") {
+            } else if (searchResultResponse.data.Response === "False") {
                 dispatch({
                     type: ActionTypes.GET_MOVIE_DETAILS,
                     payload: {

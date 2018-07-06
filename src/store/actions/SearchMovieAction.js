@@ -16,14 +16,14 @@ const SearchMovieAction = (searchQuery) => {
     return async(dispatch)=>{
         try{
             let searchResultResponse = await searchMovie(searchQuery);
-            if (searchResultResponse.data.Response=="True"){
+            if (searchResultResponse.data.Response==="True"){
                 dispatch({
                     type: ActionTypes.SEARCH_MOVIE,
                     payload: {
                         searchResult: searchResultResponse.data.Search,
                     }
                 });
-            } else if (searchResultResponse.data.Response == "False"){
+            } else if (searchResultResponse.data.Response === "False"){
                 dispatch({
                     type: ActionTypes.SEARCH_MOVIE,
                     payload: {

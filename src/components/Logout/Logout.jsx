@@ -1,22 +1,21 @@
 import React from 'react';
-import {Redirect} from 'react-router-dom'
 import { connect } from 'react-redux';
+import LogoutAction from '../../store/actions/LogoutAction'
 
-const Logout = props => {
-    return (<Redirect to={"/"}></Redirect>);
-};
-
-const mapStateToProps = (state) => {
-    return {
-        loggedIn: state.loginReducerSlice.loggedIn
+class Logout extends React.Component {
+    componentDidMount(){
+        setTimeout(()=>{
+            this.props.logoutAction();
+        },2000);
     }
-}
-
+    render(){
+        return (<span>You will logged out from the MDB now.</span>);
+    }
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginAction: (params) => dispatch((params))
+        logoutAction: () => dispatch(LogoutAction())
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+export default connect(null, mapDispatchToProps)(Logout);

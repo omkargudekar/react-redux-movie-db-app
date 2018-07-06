@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 class MovieDetails extends Component {
 
     loadMovie=()=>{
-        if (this.props.match.params.id != this.state.id) {
+        if (this.props.match.params.id !== this.state.id) {
             this.setState({
                 id: this.props.match.params.id
             });
