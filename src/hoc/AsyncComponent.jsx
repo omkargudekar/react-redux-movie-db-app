@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 
 const AsyncComponent = (importFn) => {
-    console.log(importFn)
     return class extends Component{
         
         state={
