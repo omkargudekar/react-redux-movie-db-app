@@ -18,10 +18,21 @@ import {Redirect} from 'react-router-dom'
 class LoginForm extends Component {    
     state = {
         email: '',
-        password: ''
-    }
-    
+        password: '',
 
+        validation:{
+            email:{
+                validationRules:{},
+                valid:false,
+                errorMessages:[]
+            },
+            password:{
+                validationRules: {},
+                valid: false,
+                errorMessages: []
+            }
+        }
+    }
 
     getLoginFormPayload=()=>{
         return {
@@ -72,6 +83,14 @@ class LoginForm extends Component {
                                 this.setState(StateUtil.getUpdatedKeyValueState(this.state, "email", e.target.value))
                             }} />
                         </FormControl>
+                        <FormControl>
+                            <ul>
+                                {this.state.validation.email.errorMessages.map((el,index)=>{
+                                    return <li key={index}><span  className={Classes["validationFail"]}>{el}</span></li>
+
+                                })}
+                            </ul>
+                        </FormControl>
                     </FormControlsGroup>
                     <FormControlsGroup>
                         <FormControl>
@@ -81,6 +100,14 @@ class LoginForm extends Component {
                             <InputPassword value={this.state.password} onChange={(e) => {
                                 this.setState(StateUtil.getUpdatedKeyValueState(this.state, "password", e.target.value))
                             }} />
+                        </FormControl>
+                        <FormControl>
+                            <ul>
+                                {this.state.validation.password.errorMessages.map((el, index) => {
+                                    return <li key={index}><span className={Classes["validationFail"]}>{el}</span></li>
+
+                                })}
+                            </ul>
                         </FormControl>
                     </FormControlsGroup>
                     <FormControlsGroup>
