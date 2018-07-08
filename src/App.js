@@ -36,7 +36,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <WrapperHOC>
-          <Layout className="layout">
+          <Layout className={Classes["layout"]}>
             <Header className={Classes["header"]}>
               <NavigationBar></NavigationBar>
             </Header>

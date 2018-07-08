@@ -1,15 +1,30 @@
-.content{ 
-    margin-top: 25px;
-    padding:0 25px 
+.layout{
+
+}
+.header{
+    border-bottom: 1px solid#32CD32;
 }
 
-.footer{
-    text-align: center
+.content{ 
+    position:absolute;
+    top:64px;
+    bottom:50px;
+    width:100%;
 }
+
 
 .routeDisplayArea{
-    background: #fff; 
     padding: 15;
-    min-height: 400;
+
 }
     
+
+.footer{
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    height:10px;
+    line-height: 10px;
+    text-align: center
+}
