@@ -149,7 +149,10 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+              "plugins": [["import", {
+                "libraryName": "antd",
+                "style": "css"
+              }]],
               compact: true,
             },
           },
@@ -167,6 +170,8 @@ module.exports = {
           // in the main CSS file.
           {
             test: /\.css$/,
+            exclude: [/node_modules/],
+
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -180,7 +185,7 @@ module.exports = {
                     {
                       loader: require.resolve('css-loader'),
                       options: {
-                        importLoaders: 1,
+                        //importLoaders: 1,
                         minimize: true,
                         sourceMap: shouldUseSourceMap,
                         modules: true,
@@ -213,6 +218,33 @@ module.exports = {
               )
             ),
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          {
+            test: /\.css$/,
+            exclude: [/src/],
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: {
+                    loader: require.resolve('style-loader'),
+                    options: {
+                      hmr: false,
+                    },
+                  },
+                  use: [
+                    {
+                      loader: require.resolve('css-loader'),
+                      options: {
+                        importLoaders: 1,
+                        minimize: true,
+                        sourceMap: shouldUseSourceMap,
+                      },
+                    },
+                  ],
+                },
+                extractTextPluginOptions
+              )
+            ),
           },
           // "file" loader makes sure assets end up in the `build` folder.
           // When you `import` an asset, you get its filename.

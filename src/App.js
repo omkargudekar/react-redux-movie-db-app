@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
+import { Layout,Row,Col } from 'antd'
 import NavigationBar from './components/NavigationBar/NavigationBar'
-import {Route, BrowserRouter,Switch,Redirect} from 'react-router-dom'
+import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom'
 import WrapperHOC from './hoc/WrapperHOC/WrapperHOC'
 import Logout from './components/Logout/Logout'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 import AsyncComponent from './hoc/AsyncComponent'
-import './App.css';
+import Classes from './App.css';
+import CustomFooter from './components/Footer/Footer'
+const { Header, Footer, Content } = Layout;
 
-const AsyncMovieSearchBox = AsyncComponent(()=>{return import('./components/MovieSearchBox/MovieSearchBox')});
+const AsyncMovieSearchBox = AsyncComponent(() => { return import('./components/MovieSearchBox/MovieSearchBox') });
 const AsyncMovieDetails = AsyncComponent(() => { return import('./components/MovieDetails/MovieDetails') });
-const AsyncLogin = AsyncComponent(() => {return import('./components/LoginForm/LoginForm') });
+const AsyncLogin = AsyncComponent(() => { return import('./components/LoginForm/LoginForm') });
 
 
 class App extends Component {
@@ -23,27 +26,40 @@ class App extends Component {
       </Switch>
     );
 
-    let unauthenticatedRoutes=(
+    let unauthenticatedRoutes = (
       <Switch>
         <Route path="/login" component={AsyncLogin}></Route>
         <Redirect to="/login" />
-      </Switch>   
+      </Switch>
     );
 
     return (
-        <BrowserRouter>
-          <WrapperHOC>
-           <NavigationBar></NavigationBar>
-            {(this.props.isLoggedIn) ? authenticatedRoutes : unauthenticatedRoutes}
-          </WrapperHOC>
-        </BrowserRouter>
+      <BrowserRouter>
+        <WrapperHOC>
+          <Layout className="layout">
+            <Header className={Classes["header"]}>
+              <NavigationBar></NavigationBar>
+            </Header>
+            <Content className={Classes["content"]}>
+              <Row className={Classes["routeDisplayArea"]}>
+                <Col span={24} >
+                  {(this.props.isLoggedIn) ? authenticatedRoutes : unauthenticatedRoutes}
+                </Col>
+              </Row>
+            </Content>
+            <Footer className={Classes["footer"]}>
+                  <CustomFooter></CustomFooter>
+            </Footer>
+          </Layout>
+        </WrapperHOC>
+      </BrowserRouter>
     );
   }
 }
 
 
-const mapStateToProps=(state)=>{
-  return{
+const mapStateToProps = (state) => {
+  return {
     isLoggedIn: state.loginReducerSlice.loggedIn
   }
 }

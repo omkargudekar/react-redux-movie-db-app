@@ -144,7 +144,10 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
+              "plugins": [["import", {
+                "libraryName": "antd",
+                "style": "css"
+              }]],
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
               // directory for faster rebuilds.
@@ -158,12 +161,13 @@ module.exports = {
           // in development "style" loader enables hot editing of CSS.
           {
             test: /\.css$/,
+            exclude: [/node_modules/],
             use: [
               require.resolve('style-loader'),
               {
                 loader: require.resolve('css-loader'),
                 options: {
-                  importLoaders: 1,
+                  // importLoaders: 1,
                   modules: true,
                   localIdentName: '[name]__[local]___[hash:base64:5]'
                 },
@@ -189,6 +193,21 @@ module.exports = {
                 },
               },
             ],
+          },
+          {
+            test: /\.css$/,
+            exclude: [/src/],
+            use: [
+              {
+                loader: "style-loader",
+              },
+              {
+                loader: "css-loader",
+                options: {
+                  importLoaders: 1,
+                }
+              }
+            ]
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.

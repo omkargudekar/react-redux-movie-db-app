@@ -1,0 +1,15 @@
+.content{ 
+    margin-top: 25px;
+    padding:0 25px 
+}
+
+.footer{
+    text-align: center
+}
+
+.routeDisplayArea{
+    background: #fff; 
+    padding: 15;
+    min-height: 400;
+}
+    
