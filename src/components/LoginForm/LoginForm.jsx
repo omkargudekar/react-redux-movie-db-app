@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Col,Row} from 'antd'
 import Form from '../UI/Form/Form'
 import FormControlsGroup from '../UI/FormControlsGroup/FormControlsGroup'
 import FormControl from '../UI/FormControl/FormControl'
@@ -50,65 +51,74 @@ class LoginForm extends Component {
     render() {
 
         let loginForm=(
-            <Form title="MovieDB Login">
-                <fieldset className={Classes['formFieldSet']}>
-                    <legend className={Classes['formLegend']}><FontAwesomeIcon icon={faFilm} /> MDB</legend>
-                    <FormControlsGroup>
-                        <FormControl>
-                            <Label>Sign in</Label>
-                        </FormControl>
-                        <FormControl style={{ paddingBottom: "25px" }}>
-                            <Label>to continue to MDB</Label>
-                        </FormControl>
-                    </FormControlsGroup>
-                    <FormControlsGroup>
-                        <FormControl>
-                            <Label><FontAwesomeIcon icon={faEnvelope} /> Email</Label>
-                        </FormControl>
-                        <FormControl>
-                            <InputText value={this.state.email} onChange={(e) => {
-                                this.setState(StateUtil.getUpdatedKeyValueState(this.state, "email", e.target.value))
-                            }} />
-                        </FormControl>
-                    </FormControlsGroup>
-                    <FormControlsGroup>
-                        <FormControl>
-                            <Label><FontAwesomeIcon icon={faKey} /> Password</Label>
-                        </FormControl>
-                        <FormControl>
-                            <InputPassword value={this.state.password} onChange={(e) => {
-                                this.setState(StateUtil.getUpdatedKeyValueState(this.state, "password", e.target.value))
-                            }} />
-                        </FormControl>
+            <div className={Classes['loginForm']}>
+                <Form title="MovieDB Login">
+                    <fieldset className={Classes['formFieldSet']}>
+                        <legend className={Classes['formLegend']}><FontAwesomeIcon icon={faFilm} /> MDB</legend>
+                        <FormControlsGroup>
+                            <FormControl>
+                                <Label>Sign in</Label>
+                            </FormControl>
+                            <FormControl style={{ paddingBottom: "25px" }}>
+                                <Label>to continue to MDB</Label>
+                            </FormControl>
+                        </FormControlsGroup>
+                        <FormControlsGroup>
+                            <FormControl>
+                                <Label><FontAwesomeIcon icon={faEnvelope} /> Email</Label>
+                            </FormControl>
+                            <FormControl>
+                                <InputText value={this.state.email} onChange={(e) => {
+                                    this.setState(StateUtil.getUpdatedKeyValueState(this.state, "email", e.target.value))
+                                }} />
+                            </FormControl>
+                        </FormControlsGroup>
+                        <FormControlsGroup>
+                            <FormControl>
+                                <Label><FontAwesomeIcon icon={faKey} /> Password</Label>
+                            </FormControl>
+                            <FormControl>
+                                <InputPassword value={this.state.password} onChange={(e) => {
+                                    this.setState(StateUtil.getUpdatedKeyValueState(this.state, "password", e.target.value))
+                                }} />
+                            </FormControl>
 
-                    </FormControlsGroup>
-                    <FormControlsGroup>
-                        <FormControl>
-                            <div style={{ width: "48%", display: "inline-block" }}>
-                                <Button onClick={(e) => { this.resetButtonHandler(e) }} style={{ backgroundColor: "#37457E", border: "#000 1px solid", color: "white", textDecoration: "none" }}>Reset</Button>
-                            </div>
-                            <div style={{ width: "4%", display: "inline-block" }}></div>
-                            <div style={{ width: "48%", display: "inline-block" }}>
-                                <Button onClick={(e) => { this.loginButtonHandler(e) }} style={{ backgroundColor: "#5B6C00", border: "#000 1px solid", color: "white", textDecoration: "none" }}><FontAwesomeIcon icon={faSignInAlt} /> Login</Button>
-                            </div>
-                        </FormControl>
-                    </FormControlsGroup>
-                    <FormControlsGroup>
+                        </FormControlsGroup>
+                        <FormControlsGroup>
+                            <FormControl>
+                                <div style={{ width: "48%", display: "inline-block" }}>
+                                    <Button onClick={(e) => { this.resetButtonHandler(e) }} style={{ backgroundColor: "#37457E", border: "#000 1px solid", color: "white", textDecoration: "none" }}>Reset</Button>
+                                </div>
+                                <div style={{ width: "4%", display: "inline-block" }}></div>
+                                <div style={{ width: "48%", display: "inline-block" }}>
+                                    <Button onClick={(e) => { this.loginButtonHandler(e) }} style={{ backgroundColor: "#5B6C00", border: "#000 1px solid", color: "white", textDecoration: "none" }}><FontAwesomeIcon icon={faSignInAlt} /> Login</Button>
+                                </div>
+                            </FormControl>
+                        </FormControlsGroup>
+                        <FormControlsGroup>
 
-                        <FormControl style={{ paddingTop: "25px",fontSize:"0.8rem" }}>
-                            <Label>Not your computer? Use Guest mode to sign in privately.</Label>
-                        </FormControl>
-                    </FormControlsGroup>
-                 </fieldset>
-            </Form>
+                            <FormControl style={{ paddingTop: "25px",fontSize:"0.8rem" }}>
+                                <Label>Not your computer? Use Guest mode to sign in privately.</Label>
+                            </FormControl>
+                        </FormControlsGroup>
+                    </fieldset>
+                </Form>
+            </div>
         );
         if (this.props.loggedIn){
             loginForm = (<Redirect to="/search"></Redirect>)
         }
         return (
-            <div className={Classes['loginForm']}>
-                {loginForm}
-            </div>
+            <Row type="flex" justify="space-around" align="middle">
+                <Col span={24}>
+                    {loginForm}
+
+
+                </Col>
+
+            </Row>
+            // <div className={Classes['loginForm']}>
+            // </div>
         );
     }
 }

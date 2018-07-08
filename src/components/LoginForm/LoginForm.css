@@ -1,9 +1,11 @@
 .loginForm{
+    
     max-width: 400px;
     margin: auto;
 }
 
 .formLegend{
+    width: auto;
     text-align: center;
     font-size: 1.5rem;
     background:#fff;

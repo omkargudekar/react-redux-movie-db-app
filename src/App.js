@@ -41,9 +41,9 @@ class App extends Component {
               <NavigationBar></NavigationBar>
             </Header>
             <Content className={Classes["content"]}>
-              <Row className={Classes["routeDisplayArea"]}>
+              <Row >
                 <Col span={24} >
-                  {(this.props.isLoggedIn) ? authenticatedRoutes : unauthenticatedRoutes}
+                    {(this.props.isLoggedIn) ? authenticatedRoutes : unauthenticatedRoutes}
                 </Col>
               </Row>
             </Content>
