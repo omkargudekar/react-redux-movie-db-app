@@ -98,14 +98,19 @@ class LoginForm extends Component {
                 <FormItem {...this.state.formValidation.validationFields.email.status}>
                     <Input 
                         prefix={<FontAwesomeIcon icon={faEnvelope} style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                        placeholder="email" value={this.state.email} 
+                        placeholder="email" 
+                        value={this.state.email} 
                         onChange={(e) => {
                         this.setState(StateUtil.getUpdatedKeyValueState(this.state, "email", e.target.value))
                         }}
                     />
                 </FormItem>
                 <FormItem {...this.state.formValidation.validationFields.password.status}>
-                    <Input prefix={<FontAwesomeIcon icon={faKey} style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" value={this.state.password} onChange={(e) => {
+                    <Input prefix={<FontAwesomeIcon icon={faKey} style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                    type="password" 
+                    placeholder="Password" 
+                    value={this.state.password} 
+                    onChange={(e) => {
                         this.setState(StateUtil.getUpdatedKeyValueState(this.state, "password", e.target.value))
                     }}/>
                 </FormItem>

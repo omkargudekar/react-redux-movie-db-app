@@ -1,31 +1,52 @@
 import React, { Component } from 'react';
-import Form from '../UI/Form/Form'
-import FormControlsGroup from '../UI/FormControlsGroup/FormControlsGroup'
-import FormControl from '../UI/FormControl/FormControl'
-import InputText from '../UI/InputText/InputText'
+
 import Classes from './MovieSearchBox.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilm } from '@fortawesome/free-solid-svg-icons'
+import { faFilm,faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import {connect} from 'react-redux';
 import SearchMovieAction from '../../store/actions/SearchMovieAction'
+import ClearSearchAction from '../../store/actions/ClearSearchAction'
+
 import MovieSearchResult from '../MovieSearchResult/MovieSearchResult'
+import StateUtil from '../../util/StateUtil'
+
+import { Col, Row } from 'antd'
+import { Input} from 'antd';
 
 class MovieSearchBox extends Component {
+
+    constructor(props){
+        super(props);
+        this.searchFieldRef=React.createRef();
+    }
     state={
         currentSearchQuery:null
     }
 
-    timeOutID=0;
-    updateSearchQuery=(e)=>{
-        const currentSearchQuery = e.target.value;
-        this.setState((oldState)=>{
-            return {
-                ...oldState,
-                currentSearchQuery: currentSearchQuery || this.state.currentSearchQuery
-            }
+    clearSearch=()=>{
+        clearTimeout(this.timeOutID);
+        this.props.clearSearchResult()
+        this.setState({
+            ...this.state,
+            currentSearchQuery: null
         })
     }
-    onSearchHandler=()=>{
+    handleSearchQueryValueUpdate=async(e)=>{
+        try{
+            await this.setState(StateUtil.getUpdatedKeyValueState(this.state, "currentSearchQuery", e.target.value))
+            if (this.state.currentSearchQuery.trim().length!==0){
+                this.onSearchHandler();
+            }else{
+                this.clearSearch();
+            }
+        }
+        catch(e){
+            console.error(e);
+        }
+    }
+
+    timeOutID = 0;
+    onSearchHandler = () => {
         clearTimeout(this.timeOutID);
         this.timeOutID = setTimeout(this.search, 500);
     }
@@ -34,26 +55,26 @@ class MovieSearchBox extends Component {
         this.props.searchMovie(this.state.currentSearchQuery)
     }
     render() {
+        const suffix = this.state.currentSearchQuery ? <FontAwesomeIcon icon={faWindowClose} onClick={this.clearSearch} /> : null;
+
         return (
-            <React.Fragment>
-                <div className={Classes['searchBox']}>
-                    <Form >
-                        <fieldset className={Classes['formFieldSet']}>
-                            <legend className={Classes['formLegend']}><FontAwesomeIcon icon={faFilm} /> MDB</legend>
-                        <FormControlsGroup>
-                            <FormControl>
-                                    <InputText 
-                                            onKeyUp={(e) => { this.updateSearchQuery(e) }} onKeyPress={(e) => { this.onSearchHandler(e) }} 
-                                            placeholder="Enter movie name..." 
-                                            style={{ height: '35px', textIndent: "10px", border: "1px solid #000", borderRadius: "8px",outline:'none'}} >
-                                    </InputText>
-                            </FormControl>
-                        </FormControlsGroup>
-                        </fieldset>
-                    </Form>
-                </div>
-                <MovieSearchResult searchResult={this.props.searchResult}></MovieSearchResult>    
-            </React.Fragment>
+            <Row>
+                <Col span={24}>
+                    <div className={Classes['searchBox']}>
+                        <Input
+                            placeholder="Enter movie name"
+                            prefix={<FontAwesomeIcon icon={faFilm} style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                            suffix={suffix}
+                            value={this.state.currentSearchQuery} 
+                            onChange={(e) => {this.handleSearchQueryValueUpdate(e)}}
+                            ref={this.searchFieldRef}
+                        />
+                    </div>
+                </Col>
+                <Col span={24}>
+                    <MovieSearchResult searchResult={this.props.searchResult}></MovieSearchResult>    
+                </Col>
+            </Row>
 
         );
     }
@@ -67,7 +88,9 @@ const mapStateToProps=(state)=>{
 
 const mapDispatchToProps=(dispatch)=>{
     return {
-        searchMovie: (searchQuery) => dispatch(SearchMovieAction(searchQuery))
+        searchMovie: (searchQuery) => dispatch(SearchMovieAction(searchQuery)),
+        clearSearchResult: () => dispatch(ClearSearchAction())
+
     }
 }
 

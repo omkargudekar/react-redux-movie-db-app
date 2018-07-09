@@ -3,7 +3,7 @@ import StateUtil from '../../util/StateUtil'
 import * as ActionTypes from '../actions/ActionTypes'
 
 const initialState={
-    loggedIn:false,
+    loggedIn:true,
     token:null,
     loggedInUser:null
 }
