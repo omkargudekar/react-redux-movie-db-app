@@ -26,16 +26,12 @@ class MovieDetails extends Component {
 
 
     renderMovieDetails = (data)=>{
-        return (
-            <Col sapn={24}>
-                <MovieDetailsCard data={data}></MovieDetailsCard>
-            </Col>
-            );
+        return (data.imdbID === this.state.id) ? <Col sapn={24}> <MovieDetailsCard data={data}></MovieDetailsCard></Col>:null
     }
     render() {
         return (
             <Row>
-                {(this.props.movieDetails) ? this.renderMovieDetails(this.props.movieDetails):<span>No movie with that title</span>}
+                {(this.props.movieDetails) ? this.renderMovieDetails(this.props.movieDetails):<Col span={24}>No movie with that title</Col>}
             </Row>
         );
     }
