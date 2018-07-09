@@ -1,23 +1,10 @@
-.loginForm{
-    
-    max-width: 400px;
-    margin: auto;
+.login-form {
+  max-width: 300px;
+  margin: auto;
 }
-
-.formLegend{
-    width: auto;
-    text-align: center;
-    font-size: 1.5rem;
-    background:#fff;
-    font-family: 'Play', sans-serif;
+.login-form-forgot {
+  float: right;
 }
-
-.formFieldSet{
-	border:1px solid #999;
-	border-radius:8px;
-}
-
-.validationFail{
-    color:red;
-    font-size: 0.9rem
+.login-form-button {
+  width: 100%;
 }

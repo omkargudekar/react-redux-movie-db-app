@@ -1,26 +1,54 @@
 import React, { Component } from 'react';
-import {Col,Row} from 'antd'
-import Form from '../UI/Form/Form'
-import FormControlsGroup from '../UI/FormControlsGroup/FormControlsGroup'
-import FormControl from '../UI/FormControl/FormControl'
-import Label from '../UI/Label/Label'
-import InputText from '../UI/InputText/InputText'
-import InputPassword from '../UI/InputPassword/InputPassword'
-import Button from '../UI/Button/Button'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSignInAlt, faEnvelope, faKey,faFilm } from '@fortawesome/free-solid-svg-icons'
 import StateUtil from '../../util/StateUtil'
 import LoginAction from '../../store/actions/LoginAction'
 import {connect} from 'react-redux';
-import Classes from './LoginForm.css'
 import {Redirect} from 'react-router-dom'
+import { Col, Row } from 'antd'
+import { Form,Input, Button, Checkbox } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons'
+import Classes from './LoginForm.css'
+import FormValidator from '../../util/Validator/FormValidator'
+const FormItem = Form.Item;
 
 
 class LoginForm extends Component {    
     state = {
         email: '',
-        password: ''
+        password: '',
+        validating :false,
+        submitted:false,
+        formValidation:{
+            valid: false,
+            requiredValidationFields: ["email", "password"],
+            validationFields: {
+                email: {
+                    status: {
+                        validateStatus: "",
+                        help: "",
+                        hasFeedback: true
+                    },
+                    rules: {
+                        minLen: 6,
+                        required: true
+                    }
+                },
+                password: {
+                    status: {
+                        validateStatus: "",
+                        help: "",
+                        hasFeedback: true
+                    },
+                    rules: {
+                        minLen: 6,
+                        required: true
+                    }
+                }
+            }
+        }
     }
+
+
 
     getLoginFormPayload=()=>{
         return {
@@ -29,81 +57,65 @@ class LoginForm extends Component {
         }
     }
 
-    resetButtonHandler=(e)=>{
+    formSubmitHandler=async(e)=>{
         e.preventDefault();
-        let resetState={
-            email: '',
-            password: ''
+        try{
+            await this.setState({
+                ...this.state,
+                validating: true
+            });
+            await this.setState((state, _props) => {
+                return FormValidator.getValidatedState(state);
+            });
+            if (this.state.formValidation.valid) {
+                await this.setState({
+                    ...this.state,
+                    submitted: true
+                })
+                this.props.loginAction(this.getLoginFormPayload());
+            }else{
+                this.setState({
+                    ...this.state,
+                    submitted: false,
+                    validating: false
+                })
+            }
         }
-
-        this.setState(StateUtil.getUpdatedState(this.state,resetState));
-    }
-
-    loginButtonHandler=(e)=>{
-        e.preventDefault();
-        this.props.loginAction(this.getLoginFormPayload());
-    }
-
-
-    componentDidMount(){
+        catch(e){
+            console.error(e);
+            this.setState({
+                ...this.state,
+                submitted: false,
+                validating:false
+            })
+        }
     }
 
     render() {
 
         let loginForm=(
-            <div className={Classes['loginForm']}>
-                <Form title="MovieDB Login">
-                    <fieldset className={Classes['formFieldSet']}>
-                        <legend className={Classes['formLegend']}><FontAwesomeIcon icon={faFilm} /> MDB</legend>
-                        <FormControlsGroup>
-                            <FormControl>
-                                <Label>Sign in</Label>
-                            </FormControl>
-                            <FormControl style={{ paddingBottom: "25px" }}>
-                                <Label>to continue to MDB</Label>
-                            </FormControl>
-                        </FormControlsGroup>
-                        <FormControlsGroup>
-                            <FormControl>
-                                <Label><FontAwesomeIcon icon={faEnvelope} /> Email</Label>
-                            </FormControl>
-                            <FormControl>
-                                <InputText value={this.state.email} onChange={(e) => {
-                                    this.setState(StateUtil.getUpdatedKeyValueState(this.state, "email", e.target.value))
-                                }} />
-                            </FormControl>
-                        </FormControlsGroup>
-                        <FormControlsGroup>
-                            <FormControl>
-                                <Label><FontAwesomeIcon icon={faKey} /> Password</Label>
-                            </FormControl>
-                            <FormControl>
-                                <InputPassword value={this.state.password} onChange={(e) => {
-                                    this.setState(StateUtil.getUpdatedKeyValueState(this.state, "password", e.target.value))
-                                }} />
-                            </FormControl>
-
-                        </FormControlsGroup>
-                        <FormControlsGroup>
-                            <FormControl>
-                                <div style={{ width: "48%", display: "inline-block" }}>
-                                    <Button onClick={(e) => { this.resetButtonHandler(e) }} style={{ backgroundColor: "#37457E", border: "#000 1px solid", color: "white", textDecoration: "none" }}>Reset</Button>
-                                </div>
-                                <div style={{ width: "4%", display: "inline-block" }}></div>
-                                <div style={{ width: "48%", display: "inline-block" }}>
-                                    <Button onClick={(e) => { this.loginButtonHandler(e) }} style={{ backgroundColor: "#5B6C00", border: "#000 1px solid", color: "white", textDecoration: "none" }}><FontAwesomeIcon icon={faSignInAlt} /> Login</Button>
-                                </div>
-                            </FormControl>
-                        </FormControlsGroup>
-                        <FormControlsGroup>
-
-                            <FormControl style={{ paddingTop: "25px",fontSize:"0.8rem" }}>
-                                <Label>Not your computer? Use Guest mode to sign in privately.</Label>
-                            </FormControl>
-                        </FormControlsGroup>
-                    </fieldset>
-                </Form>
-            </div>
+            <Form onSubmit={this.formSubmitHandler} className={Classes['login-form']}>
+                <FormItem {...this.state.formValidation.validationFields.email.status}>
+                    <Input 
+                        prefix={<FontAwesomeIcon icon={faEnvelope} style={{ color: 'rgba(0,0,0,.25)' }} />} 
+                        placeholder="email" value={this.state.email} 
+                        onChange={(e) => {
+                        this.setState(StateUtil.getUpdatedKeyValueState(this.state, "email", e.target.value))
+                        }}
+                    />
+                </FormItem>
+                <FormItem {...this.state.formValidation.validationFields.password.status}>
+                    <Input prefix={<FontAwesomeIcon icon={faKey} style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" value={this.state.password} onChange={(e) => {
+                        this.setState(StateUtil.getUpdatedKeyValueState(this.state, "password", e.target.value))
+                    }}/>
+                </FormItem>
+                <FormItem>
+                    <Checkbox>Remember me</Checkbox>
+                    <a className={Classes['login-form-forgot']} href="">Forgot password</a>
+                    <Button type="primary" htmlType="submit" className={Classes['login-form-button']} disabled={this.state.submitted || this.state.validating}>Log in</Button>
+                    Or <a href="">register now!</a>
+                </FormItem>
+            </Form>
         );
         if (this.props.loggedIn){
             loginForm = (<Redirect to="/search"></Redirect>)
@@ -112,13 +124,8 @@ class LoginForm extends Component {
             <Row type="flex" justify="space-around" align="middle">
                 <Col span={24}>
                     {loginForm}
-
-
                 </Col>
-
             </Row>
-            // <div className={Classes['loginForm']}>
-            // </div>
         );
     }
 }
