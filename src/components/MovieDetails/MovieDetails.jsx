@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import MovieDetailsAction from '../../store/actions/MovieDetailsAction'
+import MovieDetailsCard from '../MovieDetailsCard/MovieDetailsCard'
 import {connect} from 'react-redux';
-
+import {Row,Col} from 'antd'
 class MovieDetails extends Component {
 
     loadMovie=()=>{
@@ -26,32 +27,16 @@ class MovieDetails extends Component {
 
     renderMovieDetails = (data)=>{
         return (
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <div>{data.Title} ({data.Year})</div>
-                            <div><img src={data.Poster} alt="" style={{ height: "200px" }} /></div>
-                            <div>Writer: {data.Writer}</div>
-                            <div>Director: {data.Director}</div>
-                            <div>Actors: {data.Actors}</div>
-                            <div>Runtime: {data.Runtime}</div>
-                            <div>Genre: {data.Genre}</div>
-                            <div>Plot: {data.Plot}</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <Col sapn={24}>
+                <MovieDetailsCard data={data}></MovieDetailsCard>
+            </Col>
             );
     }
     render() {
         return (
-                <React.Fragment>
+            <Row>
                 {(this.props.movieDetails) ? this.renderMovieDetails(this.props.movieDetails):<span>No movie with that title</span>}
-                </React.Fragment>
+            </Row>
         );
     }
 }

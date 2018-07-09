@@ -1,0 +1,11 @@
+.movie-details{
+   margin:25px;
+}
+
+.movie-details-legend{
+    font-weight: bold
+}
+.movie-details-poster{
+    width:100%;
+    height: auto;
+}
