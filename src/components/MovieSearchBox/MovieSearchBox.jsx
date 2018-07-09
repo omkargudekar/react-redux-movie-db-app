@@ -52,7 +52,7 @@ class MovieSearchBox extends Component {
     }
     search=()=>{
         console.log(this.state.currentSearchQuery);
-        this.props.searchMovie(this.state.currentSearchQuery)
+        this.props.searchMovie(this.state.currentSearchQuery.trim())
     }
     render() {
         const suffix = this.state.currentSearchQuery ? <FontAwesomeIcon icon={faWindowClose} onClick={this.clearSearch} /> : null;

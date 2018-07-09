@@ -1,22 +1,42 @@
 import React from 'react';
-import MovieCard from '../MovieCard/MovieCard'
+import {Card,Row,Col} from 'antd'
+import Classes from './MovieSearchResult.css'
+import { Link } from 'react-router-dom'
+const { Meta } = Card;
+
 const MovieSearchResult = (props) => {
 
     const renderSearchResult=()=>{
         if (props.searchResult && props.searchResult.length>0){
             return props.searchResult.map((el, index) => {
-                return <MovieCard data={el} key={index}></MovieCard>
+                return (
+                    <Col key={"movie-card_" + index} xs={24} sm={12} md={8} lg={6} xl={4}>
+                        <Link to={{ pathname: '/movie/' + el.imdbID }}>
+                            <Card
+                                className={Classes["movie-card"]}
+                                hoverable
+                                cover={<img alt={el.Title} 
+                                className={Classes["movie-card-poster"]} 
+                                src={el.Poster} />}
+                            >
+                                <Meta
+                                    title={el.Title}
+                                    description={el.Year}
+                                />
+                            </Card> 
+                        </Link>
+                    </Col>
+                )
+                
             });
         }
-        return <span>No result to display.</span>
+        return <Col>No result to display.</Col>
     }
     
     return (
-        <React.Fragment>
-            <div style={{textAlign:"center"}}>
-                {renderSearchResult()}
-            </div>
-        </React.Fragment>
+        <Row type="flex" justify="space-around" align="middle">
+            {renderSearchResult()}
+        </Row>
     );
 };
 
