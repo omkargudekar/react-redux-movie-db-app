@@ -1,4 +1,9 @@
 # Movie Database
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]
+[![Build Status](https://api.travis-ci.org/omkargudekar/react-redux-movie-db-app.png)]
+
+
+
 
 MovieDB is responsive react-redux based application to demostrate development process of react based application from scratch.
 
