@@ -61,7 +61,7 @@ class MovieSearchBox extends Component {
                 <Col span={24}>
                     <div className={Classes['searchBox']}>
                         <Input
-                            placeholder="Enter movie name"
+                            placeholder="Start typing movie name here... ex Dark, Dark Knight"
                             prefix={<FontAwesomeIcon icon={faFilm} style={{ color: 'rgba(0,0,0,.25)' }} />} 
                             suffix={suffix}
                             value={this.state.currentSearchQuery} 
