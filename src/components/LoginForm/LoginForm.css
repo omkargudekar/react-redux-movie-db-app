@@ -1,5 +1,4 @@
 .login-form {
-  max-width: 300px;
   margin: auto;
 }
 .login-form-forgot {
@@ -15,4 +14,16 @@
 -webkit-box-shadow: -1px 0px 17px 0px rgba(147,151,173,1);
 -moz-box-shadow: -1px 0px 17px 0px rgba(147,151,173,1);
 box-shadow: -1px 0px 17px 0px rgba(147,151,173,1);
+}
+
+
+@media only screen and (max-width: 650px) {
+  .login-card {
+  width: 100%;
+  margin: auto; 
+  margin-top: 20vh;
+  -webkit-box-shadow: -1px 0px 17px 0px rgba(147,151,173,1);
+  -moz-box-shadow: -1px 0px 17px 0px rgba(147,151,173,1);
+  box-shadow: -1px 0px 17px 0px rgba(147,151,173,1);
+  }
 }
