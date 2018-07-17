@@ -1,6 +1,6 @@
 # Movie Database
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-![Build Status](https://api.travis-ci.org/omkargudekar/react-redux-movie-db-app.png)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/omkargudekar/react-redux-movie-db-app/blob/master/LICENSE)
+[![Build Status](https://api.travis-ci.org/omkargudekar/react-redux-movie-db-app.png)](https://api.travis-ci.org/omkargudekar/react-redux-movie-db-app)
 
 
 
