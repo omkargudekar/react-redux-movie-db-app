@@ -11,7 +11,7 @@ const MovieSearchResult = (props) => {
             return props.searchResult.map((el, index) => {
                 return (
                     <Col key={"movie-card_" + index} xs={24} sm={12} md={8} lg={6} xl={4}>
-                        <Link to={{ pathname: '/movie/' + el.imdbID }}>
+                        <Link to={{ pathname: '/movie/' + el.imdbID ,hash:'#search'}}>
                             <Card
                                 className={Classes["movie-card"]}
                                 hoverable

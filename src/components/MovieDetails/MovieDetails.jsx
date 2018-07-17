@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import MovieDetailsAction from '../../store/actions/MovieDetailsAction'
 import MovieDetailsCard from '../MovieDetailsCard/MovieDetailsCard'
 import {connect} from 'react-redux';
-import {Row,Col} from 'antd'
+import {Row,Col,Button} from 'antd'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUndo } from '@fortawesome/free-solid-svg-icons'
+
 class MovieDetails extends Component {
 
     loadMovie=()=>{
@@ -25,13 +28,17 @@ class MovieDetails extends Component {
     }
 
 
+
     renderMovieDetails = (data)=>{
         return (data.imdbID === this.state.id) ? <Col sapn={24}> <MovieDetailsCard data={data}></MovieDetailsCard></Col>:null
     }
     render() {
         return (
             <Row>
-                {(this.props.movieDetails) ? this.renderMovieDetails(this.props.movieDetails):<Col span={24}>No movie with that title</Col>}
+                {(this.props.location.hash==='#search')?<Col style={{margin:"20px",padding:"20px"}} span={24}><Button onClick={()=>{this.props.history.goBack()}}> <FontAwesomeIcon icon={faUndo} /> Back to search</Button></Col>:null}
+                <Col span={24}>
+                    {(this.props.movieDetails) ? this.renderMovieDetails(this.props.movieDetails):"No movie with that title"}
+                </Col>
             </Row>
         );
     }
