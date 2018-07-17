@@ -8,6 +8,7 @@
 MovieDB is responsive react-redux based application to demostrate development process of react based application from scratch.
 
 ## Pending Action Items
+- DataETL [ util/DataETL folder] integration in side-effects of redux.
 - Hook up with Firebase Login Service. You may enter any valid email address and 6 characters password
 - Sign up
 - 2FA

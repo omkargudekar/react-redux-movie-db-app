@@ -1,10 +1,12 @@
 import React from 'react';
-
+import { Row, Col } from 'antd'
 const Footer = () => {
     return (
-        <div>
-            Designed By: Omkar Gudekar
-        </div>
+        <Row>
+            <Col span={24}>
+                Designed By: Omkar Gudekar
+            </Col>
+        </Row>
     );
 };
 

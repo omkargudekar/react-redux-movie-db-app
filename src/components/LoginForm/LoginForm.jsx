@@ -118,7 +118,6 @@ class LoginForm extends Component {
                     <Checkbox>Remember me</Checkbox>
                     <a className={Classes['login-form-forgot']} href="">Forgot password</a>
                     <Button type="primary" htmlType="submit" className={Classes['login-form-button']} disabled={this.state.submitted || this.state.validating}>Log in</Button>
-                    Or <a href="">register now!</a>
                 </FormItem>
             </Form>
         );

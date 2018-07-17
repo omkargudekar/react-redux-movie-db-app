@@ -50,18 +50,6 @@ const MovieDetailsCard = props => {
                         <Col span={24}>
                             <Row>
                                 <Col span={24} className={Classes['movie-details-legend']}>
-                                    Writer:
-                                 </Col>
-                                <Col span={24}>
-                                    {data.Writer}
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col span={24}>
-                            <Row>
-                                <Col span={24} className={Classes['movie-details-legend']}>
                                     Runtime:
                                  </Col>
                                 <Col span={24}>

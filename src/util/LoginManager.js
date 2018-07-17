@@ -11,6 +11,7 @@ const LoginManager ={
         return localStorage.getItem('token')
     },
     isLoggedIn:()=>{
+        // need to add validate logic
         return localStorage.getItem('token') && localStorage.getItem('token').toString().length > 0
     }
 }
