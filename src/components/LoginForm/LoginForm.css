@@ -1,11 +1,18 @@
 .login-form {
   max-width: 300px;
   margin: auto;
-  margin-top:20vh;
 }
 .login-form-forgot {
   float: right;
 }
 .login-form-button {
   width: 100%;
+}
+.login-card{
+  width: 300px;
+  margin: auto; 
+  margin-top: 20vh;
+-webkit-box-shadow: -1px 0px 17px 0px rgba(147,151,173,1);
+-moz-box-shadow: -1px 0px 17px 0px rgba(147,151,173,1);
+box-shadow: -1px 0px 17px 0px rgba(147,151,173,1);
 }

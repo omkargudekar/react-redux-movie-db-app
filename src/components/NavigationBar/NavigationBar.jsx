@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Menu } from 'antd';
+import Logo from '../Logo/Logo'
 
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,6 +26,7 @@ class NavigationBar extends Component {
                 selectable={false}
                 style={{ lineHeight: '63px' }}
             >
+                <Menu.Item key="logutMenuKey" style={{ float: "left", marginLeft: "-40px" }}><Link to="/"><Logo style={{ height: "40px" }} /></Link></Menu.Item>
                 {(this.props.isLoggedIn) ? authenticatedItems : unauthenticatedItems}
             </Menu>
 

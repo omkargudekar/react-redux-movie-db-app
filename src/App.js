@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import AsyncComponent from './hoc/AsyncComponent'
 import Classes from './App.css';
 import CustomFooter from './components/Footer/Footer'
+import ErrorModal from './components/ErrorModal/ErrorModal'
 const { Header, Footer, Content } = Layout;
 
 const AsyncMovieSearchBox = AsyncComponent(() => { return import('./components/MovieSearchBox/MovieSearchBox') });
@@ -16,6 +17,9 @@ const AsyncLogin = AsyncComponent(() => { return import('./components/LoginForm/
 
 
 class App extends Component {
+  componentDidCatch(){
+    ErrorModal.show('Error While Loading Data', 'Please check console')
+  }
   render() {
     let authenticatedRoutes = (
       <Switch>
@@ -32,6 +36,7 @@ class App extends Component {
         <Redirect to="/login" />
       </Switch>
     );
+
 
     return (
       <BrowserRouter>
@@ -53,6 +58,7 @@ class App extends Component {
           </Layout>
         </WrapperHOC>
       </BrowserRouter>
+
     );
   }
 }

@@ -1,6 +1,7 @@
 .searchBox{
     max-width: 500px;
     margin: auto;
+    margin-top:40px;
 }
 .formLegend{
     text-align: center;

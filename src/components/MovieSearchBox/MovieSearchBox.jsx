@@ -6,7 +6,6 @@ import { faFilm,faWindowClose } from '@fortawesome/free-solid-svg-icons'
 import {connect} from 'react-redux';
 import SearchMovieAction from '../../store/actions/SearchMovieAction'
 import ClearSearchAction from '../../store/actions/ClearSearchAction'
-
 import MovieSearchResult from '../MovieSearchResult/MovieSearchResult'
 import StateUtil from '../../util/StateUtil'
 

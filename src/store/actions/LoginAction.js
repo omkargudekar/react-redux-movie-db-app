@@ -1,5 +1,6 @@
 import LoginService from '../../services/LoginService'
 import * as ActionTypes from './ActionTypes'
+import ErrorModal from '../../components/ErrorModal/ErrorModal'
 
 const checkCredentials=async(params)=>{
     try{
@@ -22,7 +23,7 @@ const loginSuccessAction=(email,token)=>{
     }
 }
 const loginFailAction = (error) => {
-    alert(error)
+    ErrorModal.show("Authorization Error",error);
     return {
         type: ActionTypes.LOGIN,
         payload: {
@@ -41,7 +42,8 @@ const loginAction=(params)=>{
                 dispatch(loginSuccessAction(params.email, loginResponse.data.token))
             }
         }catch(e){
-            dispatch(loginFailAction(e.response.data.error));
+            dispatch(loginFailAction("Failed to login"));
+            
         }
     }
 }

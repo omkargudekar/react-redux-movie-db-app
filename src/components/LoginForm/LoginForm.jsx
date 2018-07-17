@@ -3,12 +3,14 @@ import StateUtil from '../../util/StateUtil'
 import LoginAction from '../../store/actions/LoginAction'
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom'
-import { Col, Row } from 'antd'
+import { Col,Card, Row } from 'antd'
 import { Form,Input, Button, Checkbox } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons'
 import Classes from './LoginForm.css'
 import FormValidator from '../../util/Validator/FormValidator'
+import Logo from '../Logo/Logo'
+
 const FormItem = Form.Item;
 
 
@@ -48,8 +50,6 @@ class LoginForm extends Component {
         }
     }
 
-
-
     getLoginFormPayload=()=>{
         return {
             email:this.state.email,
@@ -70,7 +70,9 @@ class LoginForm extends Component {
             if (this.state.formValidation.valid) {
                 await this.setState({
                     ...this.state,
-                    submitted: true
+                    submitted: true,
+                    validating: false
+
                 })
                 this.props.loginAction(this.getLoginFormPayload());
             }else{
@@ -94,32 +96,38 @@ class LoginForm extends Component {
     render() {
 
         let loginForm=(
-            <Form onSubmit={this.formSubmitHandler} className={Classes['login-form']}>
-                <FormItem {...this.state.formValidation.validationFields.email.status}>
-                    <Input 
-                        prefix={<FontAwesomeIcon icon={faEnvelope} style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                        placeholder="email" 
-                        value={this.state.email} 
-                        onChange={(e) => {
-                        this.setState(StateUtil.getUpdatedKeyValueState(this.state, "email", e.target.value))
-                        }}
-                    />
-                </FormItem>
-                <FormItem {...this.state.formValidation.validationFields.password.status}>
-                    <Input prefix={<FontAwesomeIcon icon={faKey} style={{ color: 'rgba(0,0,0,.25)' }} />} 
-                    type="password" 
-                    placeholder="Password" 
-                    value={this.state.password} 
-                    onChange={(e) => {
-                        this.setState(StateUtil.getUpdatedKeyValueState(this.state, "password", e.target.value))
-                    }}/>
-                </FormItem>
-                <FormItem>
-                    <Checkbox>Remember me</Checkbox>
-                    <a className={Classes['login-form-forgot']} href="">Forgot password</a>
-                    <Button type="primary" htmlType="submit" className={Classes['login-form-button']} disabled={this.state.submitted || this.state.validating}>Log in</Button>
-                </FormItem>
-            </Form>
+
+            <Card title={<span><Logo style={{ height: "40px" }} /> <span>MovieDB Sign in</span></span>} className={Classes["login-card"]}>
+                <Form onSubmit={this.formSubmitHandler} className={Classes['login-form']}>
+                        <FormItem style={{ textAlign: "center" }}>
+                        </FormItem>
+                        <FormItem {...this.state.formValidation.validationFields.email.status}>
+                            <Input
+                                prefix={<FontAwesomeIcon icon={faEnvelope} style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                placeholder="email"
+                                value={this.state.email}
+                                onChange={(e) => {
+                                    this.setState(StateUtil.getUpdatedKeyValueState(this.state, "email", e.target.value))
+                                }}
+                            />
+                        </FormItem>
+                        <FormItem {...this.state.formValidation.validationFields.password.status}>
+                            <Input prefix={<FontAwesomeIcon icon={faKey} style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                type="password"
+                                placeholder="Password"
+                                value={this.state.password}
+                                onChange={(e) => {
+                                    this.setState(StateUtil.getUpdatedKeyValueState(this.state, "password", e.target.value))
+                                }} />
+                        </FormItem>
+                        <FormItem>
+                            <Checkbox>Remember me</Checkbox>
+                            <a className={Classes['login-form-forgot']} href="">Forgot password</a>
+                            <Button type="primary" htmlType="submit" className={Classes['login-form-button']} disabled={this.state.validating}>Log in</Button>
+                        </FormItem>
+                </Form>
+            </Card> 
+            
         );
         if (this.props.loggedIn){
             loginForm = (<Redirect to="/search"></Redirect>)
